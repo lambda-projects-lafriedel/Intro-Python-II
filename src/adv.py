@@ -1,10 +1,11 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons."),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -38,18 +39,25 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player("Bob", room['outside'])
+
+dirs = ["n", "e", "s", "w"]
 
 # Write a loop that:
-
 # * Prints the current room name
 
+
+print(f'{player.name} is currently in the {player.current_room.name}. {player.current_room.description}')
 
 # * Prints the current description (the textwrap module might be useful here).
 
 
 # * Waits for user input and decides what to do.
+    #choice = input("Choose a direction (n, e, s or w): ")
 
-
+    #if (choice == "n" and player.current_room == room["outside"]) or \
+     #   (choice == "n" and player.current_room == room["foyer"]) or \
+      #  (choice == "n" and player.current_room == room["narrow"])
 # If the user enters a cardinal direction, attempt to move to the room there.
 
 
