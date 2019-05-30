@@ -23,7 +23,7 @@ class Room:
     # Prints the room's inventory
     def room_inventory(self):
         if len(self.items) == 0:
-            print("There are no items in this room.")
+            print("There are no items in this room.\n")
         else:
             print("Items in this room:")
             for item in self.items:

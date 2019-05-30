@@ -60,7 +60,7 @@ def player_advance(direction):
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 while True:
-    print(f'{player.name} is currently in the {player.current_room.name}. {player.current_room.description}\n')
+    print(f'\n{player.name} is currently in the {player.current_room.name}. {player.current_room.description}\n')
     
     player.current_room.room_inventory()
 
