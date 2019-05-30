@@ -1,3 +1,5 @@
+# Controller of MVC
+
 from room import Room
 from player import Player
 from item import Item
@@ -68,25 +70,40 @@ while True:
 # * Waits for user input and decides what to do.
     choice = input(f'\nWhat direction shall {player.name} travel next? Choose a direction (n, e, s or w): ')
     print(f'\n{player.name} chose {choice}.\n')
-
-# If the user enters "q", quit the game.
-    if choice == "q":
-        break
-# If the user enters a cardinal direction, attempt to move to the room there.
-    elif choice in dirs:
-        move = player_advance(choice)
-        if move == 0:
-            print(f"{player.name} cannot move in that direction. Try again.\n")
-        if move == 1:
-            player.current_room = player.current_room.n_to
-        if move == 2:
-            player.current_room = player.current_room.e_to
-        if move == 3:
-            player.current_room = player.current_room.s_to
-        if move == 4:
-            player.current_room = player.current_room.w_to
-    else:
-        print("Invalid input.\n")
+    
+    choice_list = choice.split()
+    print(len(choice_list))
+#    If the user enters "q", quit the game.
+    if len(choice_list) == 1:
+        if choice_list[0] == "q":
+            break
+        # If the user enters a cardinal direction, attempt to move to the room there.
+        elif choice_list[0] in dirs:
+            move = player_advance(choice)
+            if move == 0:
+                print(f"{player.name} cannot move in that direction. Try again.\n")
+            if move == 1:
+                player.current_room = player.current_room.n_to
+            if move == 2:
+                player.current_room = player.current_room.e_to
+            if move == 3:
+                player.current_room = player.current_room.s_to
+            if move == 4:
+                player.current_room = player.current_room.w_to
+        else:
+            print("Invalid input.\n")
+    # If len(choice) == 2, assume it's to perform an action on an item
+    elif len(choice_list) == 2:
+        if (choice_list[0] == "get") or \
+            (choice_list[0] == "take"):
+                # print(choice_list[0])
+            for i in range(len(player.current_room.items)):
+                if choice_list[1] in player.current_room.items[i]:
+                    print("Items: ", player.current_room.items[i], "Choice: ", choice_list[1])
+                    #player.current_room.items.remove(choice_list[1])
+                    #player.inventory.append(choice_list[1])
+                #else:
+                    #print(f'{choice_list[1]} does not exist.')
 # Print an error message if the movement isn't allowed.
 
 
