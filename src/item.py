@@ -6,8 +6,10 @@ class Item:
     def __str__(self):
         return f'{self.name}'
 
+    # Prints confirmation that item was taken
     def on_take(self):
         print(f'Picked up {self.name}')
-        
+
+    # Prints confirmation that item was dropped
     def on_drop(self):
         print(f'Dropped {self.name}')

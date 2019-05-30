@@ -6,12 +6,15 @@ class Player:
         self.current_room = current_room
         self.inventory = []
     
+    # Add item to player's inventory
     def take_item(self, item):
         self.inventory.append(item)
     
+    # Remove item from player's inventory
     def drop_item(self, item):
         self.inventory.remove(item)
     
+    # Prints list of player's current inventory
     def player_inventory(self):
         if len(self.inventory) == 0:
             print("No items being carried.")
@@ -19,3 +22,10 @@ class Player:
             print("Carrying:")
             for item in self.inventory:
                 print(item)
+
+    # Checks if item to drop is in player's inventory
+    def id_inventory(self, requested_item):
+        for item in self.inventory:
+            if item.name == requested_item:
+                return True
+        return False

@@ -34,7 +34,7 @@ room['treasure'].s_to = room['narrow']
 # Main
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player("Bob", room['outside'], None)
+player = Player("Bob", room['outside'])
 
 # Acceptable direction inputs
 dirs = ["n", "e", "s", "w"]
@@ -62,22 +62,20 @@ def player_advance(direction):
 while True:
     print(f'{player.name} is currently in the {player.current_room.name}. {player.current_room.description}\n')
 
-    print(f'{player.name} sees some items in this room:\n')
-
-    for i in range(len(player.current_room.items)):
-        print(player.current_room.items[i])
-
 # * Waits for user input and decides what to do.
     choice = input(f'\nWhat direction shall {player.name} travel next? Choose a direction (n, e, s or w): ')
     print(f'\n{player.name} chose {choice}.\n')
     
     choice_list = choice.split()
-    print(len(choice_list))
+
 #    If the user enters "q", quit the game.
     if len(choice_list) == 1:
         if choice_list[0] == "q":
             break
-        # If the user enters a cardinal direction, attempt to move to the room there.
+
+        elif (choice_list[0] == "i") or (choice_list[0] == "inventory"):
+            player.player_inventory()
+
         elif choice_list[0] in dirs:
             move = player_advance(choice)
             if move == 0:
@@ -93,17 +91,9 @@ while True:
         else:
             print("Invalid input.\n")
     # If len(choice) == 2, assume it's to perform an action on an item
-    elif len(choice_list) == 2:
-        if (choice_list[0] == "get") or \
-            (choice_list[0] == "take"):
+    # elif len(choice_list) == 2:
+    #     if (choice_list[0] == "get") or \
+    #         (choice_list[0] == "take"):
                 # print(choice_list[0])
-            for i in range(len(player.current_room.items)):
-                if choice_list[1] in player.current_room.items[i]:
-                    print("Items: ", player.current_room.items[i], "Choice: ", choice_list[1])
-                    #player.current_room.items.remove(choice_list[1])
-                    #player.inventory.append(choice_list[1])
-                #else:
-                    #print(f'{choice_list[1]} does not exist.')
+
 # Print an error message if the movement isn't allowed.
-
-
