@@ -61,11 +61,13 @@ def player_advance(direction):
 # * Prints the current description (the textwrap module might be useful here).
 while True:
     print(f'{player.name} is currently in the {player.current_room.name}. {player.current_room.description}\n')
+    
+    player.current_room.room_inventory()
 
 # * Waits for user input and decides what to do.
     choice = input(f'\nWhat direction shall {player.name} travel next? Choose a direction (n, e, s or w): ')
     print(f'\n{player.name} chose {choice}.\n')
-    
+
     choice_list = choice.split()
 
 #    If the user enters "q", quit the game.
@@ -82,6 +84,7 @@ while True:
                 print(f"{player.name} cannot move in that direction. Try again.\n")
             if move == 1:
                 player.current_room = player.current_room.n_to
+                # player.current_room.room_inventory()
             if move == 2:
                 player.current_room = player.current_room.e_to
             if move == 3:
@@ -91,9 +94,14 @@ while True:
         else:
             print("Invalid input.\n")
     # If len(choice) == 2, assume it's to perform an action on an item
-    # elif len(choice_list) == 2:
-    #     if (choice_list[0] == "get") or \
-    #         (choice_list[0] == "take"):
-                # print(choice_list[0])
+    elif len(choice_list) == 2:
+        if (choice_list[0] == "get") or (choice_list[0] == "take"):
+            input_item = choice_list[1]
+
+            if player.current_room.id_item(input_item):
+                player.current_room.remove_item(input_item)
+                player.take_item(input_item)
+            else:
+                print("That item does not exist in this room.")
 
 # Print an error message if the movement isn't allowed.
