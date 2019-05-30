@@ -14,7 +14,7 @@ class Player:
     # Remove item from player's inventory
     def drop_item(self, item_to_drop):
         for item in self.inventory:
-            if item.name == item_to_drop:
+            if item == item_to_drop:
                 self.inventory.remove(item)
                 item.on_drop()
     

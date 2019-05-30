@@ -17,8 +17,8 @@ class Room:
                 self.items.remove(item)
     
     # Adds an item to the room
-    def add_item(self, dropped_item_name):
-        self.items.append(dropped_item_name)
+    def add_item(self, dropped_item):
+        self.items.append(dropped_item)
 
     # Prints the room's inventory
     def room_inventory(self):
