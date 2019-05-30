@@ -28,10 +28,9 @@ class Room:
 
     # Removes an item from the room
     def remove_item(self, requested_item):
-        # for item in self.items:
-        #     if item.name == requested_item:
-        self.items.remove(requested_item)
-        # May not need the for loop - might be redundant due to loop in id_item. Could just do self.items.remove(item)?
+        for item in self.items:
+            if item.name == requested_item:
+                self.items.remove(item)
     
     # Adds an item to the room
     def add_item(self, dropped_item):

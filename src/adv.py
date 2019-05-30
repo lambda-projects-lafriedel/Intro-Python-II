@@ -84,7 +84,6 @@ while True:
                 print(f"{player.name} cannot move in that direction. Try again.\n")
             if move == 1:
                 player.current_room = player.current_room.n_to
-                # player.current_room.room_inventory()
             if move == 2:
                 player.current_room = player.current_room.e_to
             if move == 3:
