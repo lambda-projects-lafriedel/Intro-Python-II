@@ -33,3 +33,9 @@ class Player:
             if item.name == requested_item:
                 return True
         return False
+
+    # Gets whole item tuple to be transferred
+    def get_player_item(self, dropped_item_name):
+        for item in self.inventory:
+                if item.name == dropped_item_name:
+                    return item
