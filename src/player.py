@@ -9,12 +9,14 @@ class Player:
     # Add item to player's inventory
     def take_item(self, item):
         self.inventory.append(item)
+        item.on_take()
     
     # Remove item from player's inventory
     def drop_item(self, item_to_drop):
         for item in self.inventory:
             if item.name == item_to_drop:
                 self.inventory.remove(item)
+                item.on_drop()
     
     # Prints list of player's current inventory
     def player_inventory(self):

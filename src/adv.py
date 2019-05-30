@@ -94,13 +94,20 @@ while True:
             print("Invalid input.\n")
     # If len(choice) == 2, assume it's to perform an action on an item
     elif len(choice_list) == 2:
+        input_item = choice_list[1]
+
         if (choice_list[0] == "get") or (choice_list[0] == "take"):
-            input_item = choice_list[1]
 
             if player.current_room.id_item(input_item):
+                player.take_item(player.current_room.get_room_item(input_item))
                 player.current_room.remove_item(input_item)
-                player.take_item(input_item)
             else:
                 print("That item does not exist in this room.")
+
+        if (choice_list[0] == "drop"):
+            if player.id_inventory(input_item):
+                player.drop_item(input_item)
+                player.current_room.add_item(input_item)
+
 
 # Print an error message if the movement isn't allowed.

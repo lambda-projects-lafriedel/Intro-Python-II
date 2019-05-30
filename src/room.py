@@ -10,6 +10,16 @@ class Room:
         self.w_to = None
         self.s_to = None
 
+    # Removes an item from the room
+    def remove_item(self, requested_item_name):
+        for item in self.items:
+            if item.name == requested_item_name:
+                self.items.remove(item)
+    
+    # Adds an item to the room
+    def add_item(self, dropped_item_name):
+        self.items.append(dropped_item_name)
+
     # Prints the room's inventory
     def room_inventory(self):
         if len(self.items) == 0:
@@ -20,21 +30,18 @@ class Room:
                 print(item)
     
     # Checks if player's requested item is in the room
-    def id_item(self, requested_item):
+    def id_item(self, requested_item_name):
         for item in self.items:
-            if item.name == requested_item:
+            if item.name == requested_item_name:
                 return True
-        return False
+            else:
+                return False
 
-    # Removes an item from the room
-    def remove_item(self, requested_item):
+    # Gets whole item tuple to be transferred
+    def get_room_item(self, requested_item_name):
         for item in self.items:
-            if item.name == requested_item:
-                self.items.remove(item)
-    
-    # Adds an item to the room
-    def add_item(self, dropped_item):
-        self.items.append(dropped_item)
+                if item.name == requested_item_name:
+                    return item
     
 '''
     Could use a __str__ here to print name and description without using print()
