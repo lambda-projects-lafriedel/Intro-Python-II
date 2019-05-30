@@ -107,8 +107,8 @@ while True:
 
         if (choice_list[0] == "drop"):
             if player.id_inventory(input_item):
+                player.current_room.add_item(player.get_player_item(input_item))
                 player.drop_item(player.get_player_item(input_item))
-                player.current_room.add_item(input_item)
             else:
                 print("That item does not exist in the inventory.")
 
