@@ -111,6 +111,8 @@ while True:
                 player.drop_item(player.get_player_item(input_item))
             else:
                 print("That item does not exist in the inventory.")
+    else:
+        print("I don't understand that command.")
 
 
 # Print an error message if the movement isn't allowed.

@@ -34,8 +34,8 @@ class Room:
         for item in self.items:
             if item.name == requested_item_name:
                 return True
-            else:
-                return False
+            # else:
+            #     return False
 
     # Gets whole item tuple to be transferred
     def get_room_item(self, requested_item_name):
