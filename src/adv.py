@@ -1,3 +1,5 @@
+# Controller of MVC
+
 from room import Room
 from player import Player
 from item import Item
@@ -32,7 +34,7 @@ room['treasure'].s_to = room['narrow']
 # Main
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player("Bob", room['outside'], None)
+player = Player("Bob", room['outside'])
 
 # Acceptable direction inputs
 dirs = ["n", "e", "s", "w"]
@@ -58,35 +60,59 @@ def player_advance(direction):
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 while True:
-    print(f'{player.name} is currently in the {player.current_room.name}. {player.current_room.description}\n')
-
-    print(f'{player.name} sees some items in this room:\n')
-
-    for i in range(len(player.current_room.items)):
-        print(player.current_room.items[i])
+    print(f'\n{player.name} is currently in the {player.current_room.name}. {player.current_room.description}\n')
+    
+    player.current_room.room_inventory()
 
 # * Waits for user input and decides what to do.
     choice = input(f'\nWhat direction shall {player.name} travel next? Choose a direction (n, e, s or w): ')
     print(f'\n{player.name} chose {choice}.\n')
 
-# If the user enters "q", quit the game.
-    if choice == "q":
-        break
-# If the user enters a cardinal direction, attempt to move to the room there.
-    elif choice in dirs:
-        move = player_advance(choice)
-        if move == 0:
-            print(f"{player.name} cannot move in that direction. Try again.\n")
-        if move == 1:
-            player.current_room = player.current_room.n_to
-        if move == 2:
-            player.current_room = player.current_room.e_to
-        if move == 3:
-            player.current_room = player.current_room.s_to
-        if move == 4:
-            player.current_room = player.current_room.w_to
+    choice_list = choice.split()
+
+#    If the user enters "q", quit the game.
+    if len(choice_list) == 1:
+        if choice_list[0] == "q":
+            break
+
+        elif (choice_list[0] == "i") or (choice_list[0] == "inventory"):
+            player.player_inventory()
+
+        elif choice_list[0] in dirs:
+            move = player_advance(choice)
+            if move == 0:
+                print(f"{player.name} cannot move in that direction. Try again.\n")
+            if move == 1:
+                player.current_room = player.current_room.n_to
+            if move == 2:
+                player.current_room = player.current_room.e_to
+            if move == 3:
+                player.current_room = player.current_room.s_to
+            if move == 4:
+                player.current_room = player.current_room.w_to
+        else:
+            print("Invalid input.\n")
+    # If len(choice) == 2, assume it's to perform an action on an item
+    elif len(choice_list) == 2:
+        
+        input_item = choice_list[1]
+
+        if (choice_list[0] == "get") or (choice_list[0] == "take"):
+
+            if player.current_room.id_item(input_item):
+                player.take_item(player.current_room.get_room_item(input_item))
+                player.current_room.remove_item(input_item)
+            else:
+                print("That item does not exist in this room.")
+
+        if (choice_list[0] == "drop"):
+            if player.id_inventory(input_item):
+                player.current_room.add_item(player.get_player_item(input_item))
+                player.drop_item(player.get_player_item(input_item))
+            else:
+                print("That item does not exist in the inventory.")
     else:
-        print("Invalid input.\n")
+        print("I don't understand that command.")
+
+
 # Print an error message if the movement isn't allowed.
-
-
